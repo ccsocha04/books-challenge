@@ -2,11 +2,11 @@
 Aplicación basada en Express + EJS para la practica de ejercicios de CRUD
 
 ## Levantando la app
-1. Primero se debe hacer un `fork` de este repositorio con el botón que encontramos arriba a la derecha y clonarlo en tu computadora. Asi podras trabajar con tu propia versión del repositorio.
-2. Conectarse a MySQL y correr el script de creación de la base de datos llamado `books-db.sql`
-3. Instalar las dependencias con el comando `npm install`
-4. De ser necesario, actualizar las credenciales de la base de datos en el archivo `src/database/config`
-5. Levantar la aplicación con el comando `npm run start` o `npm run test` si quieren trabajar con nodemon
+- [x] 1. Primero se debe hacer un `fork` de este repositorio con el botón que encontramos arriba a la derecha y clonarlo en tu computadora. Asi podras trabajar con tu propia versión del repositorio.
+- [x] 2. Conectarse a MySQL y correr el script de creación de la base de datos llamado `books-db.sql`
+- [x] 3. Instalar las dependencias con el comando `npm install`
+- [x] 4. De ser necesario, actualizar las credenciales de la base de datos en el archivo `src/database/config`
+- [x] 5. Levantar la aplicación con el comando `npm run start` o `npm run test` si quieren trabajar con nodemon
 
 ## Explorando la app
 La app tiene 3 secciones principales
