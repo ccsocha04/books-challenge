@@ -20,7 +20,7 @@ La app tiene 3 secciones principales
 * Registro: vista para crear un nuevo usuario. 
 
 ## Desafios
-1. Implementar la vista de detalle de un libro. Para ello debemos buscar en la base de datos el libro cuyo Id sea igual al que se envia por parametro en la ruta de nuestro endpoint y actualizar la vista `bookDetail.ejs` para recibir y mostrar estos datos.
+- [x] 1. Implementar la vista de detalle de un libro. Para ello debemos buscar en la base de datos el libro cuyo Id sea igual al que se envia por parametro en la ruta de nuestro endpoint y actualizar la vista `bookDetail.ejs` para recibir y mostrar estos datos.
 2. Busqueda de libros: Desarrollar la funcionalidad de busqueda, para esto utilizaremos el formulario de busqueda que se encuentra en la vista de `search.ejs`. Debemos escuchar las peticiones POST sobre la ruta `/books/search` y con el campo `title` del body buscar en la base de datos los libros que tengan un titulo similar.
 3. Libros de un autor: implementar la vista de `authorBooks.ejs` a la cual llegamos haciendo click en un autor, esta vista debera listar todos los libros de un determinado autor en particular, leyendo su Id por parametro.
 4. Edicion de libros: Implementar el formulario de edicion de libros, tener en cuenta que solo un usuario administrador debera tener acceso a esta funcionalidad (ocultar el boton para usuarios comunes).
