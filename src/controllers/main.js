@@ -26,7 +26,19 @@ const mainController = {
   },
   bookSearchResult: (req, res) => {
     // Implement search by title
-    res.render('search');
+    let searchTitle = req.body.title;
+    db.Book.findAll({
+      include: [{ association: 'authors' }],
+      where: {
+        title: {
+          [db.Sequelize.Op.like]: `%${searchTitle}%`
+        }
+      }
+    })
+      .then((books) => {
+        res.render('search', { books });
+      })
+      .catch((error) => console.log(error));
   },
   deleteBook: (req, res) => {
     // Implement delete book
