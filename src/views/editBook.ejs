@@ -12,14 +12,14 @@
 <body>
   <div class="container">
   <%- include('partials/header.ejs') %>
-  <section class="vh-100" style="background-color: #2779e2;">
+  <section class="vh-150" style="background-color: #2779e2;">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-xl-9">
   
-          <h1 class="text-white mb-4">Edit book <%= id %> </h1>
+          <h1 class="text-white mb-4">Edit book <%= book.id %> </h1>
   
-          <form action="/books/edit/<%= id %> " method="POST" class="card" style="border-radius: 15px;">
+          <form action="/books/edit/<%= book.id %> " method="POST" class="card" style="border-radius: 15px;">
             <div class="card-body">
   
               <div class="row align-items-center pt-4 pb-3">
@@ -30,7 +30,7 @@
                 </div>
                 <div class="col-md-9 pe-5">
   
-                  <input type="text" name="title" class="form-control form-control-lg" />
+                  <input type="text" name="title" class="form-control form-control-lg" value="<%= book.title %>" />
   
                 </div>
               </div>
@@ -45,7 +45,7 @@
                 </div>
                 <div class="col-md-9 pe-5">
   
-                  <input type="text" name="cover" class="form-control form-control-lg" />
+                  <input type="text" name="cover" class="form-control form-control-lg" value="<%= book.cover %>" />
   
                 </div>
               </div>
@@ -60,7 +60,7 @@
                 </div>
                 <div class="col-md-9 pe-5">
   
-                  <input type="text" name="description" class="form-control form-control-lg" />
+                  <textarea name="description" class="form-control form-control-lg" rows="6"><%= book.description %></textarea>
   
                 </div>
               </div>

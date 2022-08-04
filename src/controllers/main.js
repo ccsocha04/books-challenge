@@ -87,7 +87,12 @@ const mainController = {
   },
   edit: (req, res) => {
     // Implement edit book
-    res.render('editBook', {id: req.params.id})
+    db.Book.findByPk(req.params.id, {
+      include: [{ association: 'authors' }]
+    })
+      .then((book) => {
+        res.render('editBook', { book });
+      }).catch((error) => console.log(error));
   },
   processEdit: (req, res) => {
     // Implement edit book
