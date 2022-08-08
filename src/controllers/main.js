@@ -42,7 +42,8 @@ const mainController = {
   },
   deleteBook: (req, res) => {
     // Implement delete book
-    res.render('home');
+    res.send('delete book');
+    // res.render('home');
   },
   authors: (req, res) => {
     db.Author.findAll()
@@ -79,11 +80,13 @@ const mainController = {
   },
   login: (req, res) => {
     // Implement login process
+
     res.render('login');
   },
   processLogin: (req, res) => {
     // Implement login process
-    res.render('home');
+    res.send('Session started id: ' + req.session.id);
+    // res.render('home');
   },
   edit: (req, res) => {
     // Implement edit book
