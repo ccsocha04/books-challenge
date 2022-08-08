@@ -99,7 +99,23 @@ const mainController = {
   },
   processEdit: (req, res) => {
     // Implement edit book
-    res.render('home');
+    res.send('edit book metode PUT');  
+    /*db.Book.update({
+      title: req.body.title,
+      cover: req.body.cover,
+      description: req.body.description
+    })
+      .then(() => {
+        db.Book.findAll({
+          include: [{ association: 'authors' }]
+        })
+          .then((books) => {
+            res.render('home', { books });
+          })
+          .catch((error) => console.log(error))
+      })
+      .catch((error) => console.log(error))
+      */
   }
 };
 
