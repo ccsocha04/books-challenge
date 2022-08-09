@@ -127,6 +127,7 @@ const mainController = {
           if (user) {
             if (bcryptjs.compareSync(req.body.password, user.Pass)) {
               req.session.user = user;
+              res.cookie('user', user.Email, { maxAge: 1000 * 60 * 60 * 24 * 7 });
               db.Book.findAll({
                 include: [{ association: 'authors' }]
               })

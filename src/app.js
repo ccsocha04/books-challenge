@@ -1,5 +1,7 @@
 const express = require('express');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
+
 const methodOverride = require("method-override");
 
 const mainRouter = require('./routes/main');
@@ -11,14 +13,12 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(methodOverride("_method"));
+app.use(cookieParser());
 
 app.use(session({
   secret: 'secret',
   resave: false,
-  saveUninitialized: true,
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 24 * 7,
-  }, 
+  saveUninitialized: false
 }));
 
 app.set('view engine', 'ejs');
