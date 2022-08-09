@@ -10,9 +10,16 @@
       <li><a href="/books/search" class="nav-link px-2 link-dark">Search</a></li>
     </ul>
 
+    <% if (locals.isLogged) { %>
+      <div class="col-md-3 text-end">
+        <a href="/users/logout" class="btn btn-outline-primary me-2">Logout</a>
+      </div>
+    <% } else { %>
     <div class="col-md-3 text-end">
       <a href="/users/login" class="btn btn-outline-primary me-2">Login</a>
       <a href="/users/register" class="btn btn-outline-primary me-2">Sign-up</a>
     </div>
+    <% } %>
+    
   </header>
 </div>

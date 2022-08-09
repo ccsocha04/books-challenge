@@ -23,14 +23,16 @@
           </p>
           <p class="lead mb-4 fw-bold">Description: </p>
           <p class="lead mb-4"><%= book.description %></p>
+          <% if (locals.isLogged && locals.isAdmin) { %>
           <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
             <a href="/books/edit/<%= book.id %>">
               <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Edit</button>
             </a>
-            <a href="/books/<%= book.id %>">
-              <button type="button" class="btn btn-outline-secondary btn-lg px-4">Delete</button>
-            </a>
+            <form action="/books/<%= book.id %>?_method=DELETE" method="POST" class="col-12 col-lg-auto mb-3 me-lg-3" _lpchecked="1">
+              <button type="submit" class="btn btn-outline-secondary btn-lg px-4">Delete</button>
+            </form>
           </div>
+          <% } %>
         </div>
       </div>
   </div>

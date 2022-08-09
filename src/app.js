@@ -5,6 +5,8 @@ const cookieParser = require('cookie-parser');
 const methodOverride = require("method-override");
 
 const mainRouter = require('./routes/main');
+
+const userLoggedMiddleware = require('./middlewares/userLoggedMiddleware');
 const logMiddleware = require('./middlewares/logMiddleware');
 const notFoundMiddleware = require('./middlewares/notFoundMiddleware');
 
@@ -24,11 +26,12 @@ app.use(session({
 app.set('view engine', 'ejs');
 app.set('views', 'src/views');
 
+app.use(userLoggedMiddleware);
+
 app.use('/', mainRouter);
 
 app.use(logMiddleware);
 app.use(notFoundMiddleware);
-
 
 app.listen(3000, () => {
   console.log('listening in http://localhost:3000');

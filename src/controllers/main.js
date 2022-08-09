@@ -43,8 +43,25 @@ const mainController = {
   },
   deleteBook: (req, res) => {
     // Implement delete book
-    res.send('delete book');
-    // res.render('home');
+    db.Book.destroy({ 
+      where: { 
+        id: req.params.id 
+      }, 
+      include: [{ association: 'authors' }],
+      force: true 
+    })
+      .then((book) => {
+        db.Book.findAll({
+          include: [{ association: 'authors' }]
+        })
+          .then((books) => {
+            res.render('home', { 
+              book,
+              books 
+            });
+          })
+          .catch((error) => console.log(error));
+      }).catch((error) => console.log(error));
   },
   authors: (req, res) => {
     db.Author.findAll()
@@ -126,8 +143,11 @@ const mainController = {
         .then((user) => {
           if (user) {
             if (bcryptjs.compareSync(req.body.password, user.Pass)) {
-              req.session.user = user;
-              res.cookie('user', user.Email, { maxAge: 1000 * 60 * 60 * 24 * 7 });
+              
+              user.Pass = null;
+              req.session.userLogged = user;
+              res.cookie('user', user.Email, { maxAge: 1000 * 60 * 60 * 24 });
+              
               db.Book.findAll({
                 include: [{ association: 'authors' }]
               })
@@ -152,6 +172,11 @@ const mainController = {
           }
         }).catch((error) => console.log(error));
     }
+  },
+  logout: (req, res) => {
+    req.session.destroy();
+    res.clearCookie('user');
+    return res.redirect('/');
   },
   edit: (req, res) => {
     // Implement edit book

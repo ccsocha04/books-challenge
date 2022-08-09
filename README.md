@@ -26,8 +26,8 @@ La app tiene 3 secciones principales
 - [x] 4. Edicion de libros: Implementar el formulario de edicion de libros, tener en cuenta que solo un usuario administrador debera tener acceso a esta funcionalidad (ocultar el boton para usuarios comunes).
 5. Eliminacion de libros: Implementar el boton de eliminación en el detalle de libros, tener en cuenta que solo los usuarios administradores pueden realizar esta accion.
 6. Login y logout: Implementar la funcionalidad de login. Tener en cuenta:
-   - El email debe estar registrado en la base de datos - [x].
-   - La contraseña debe ser la misma que la que guardamos en la base de datos (recordar que las contraseñas se guardan cifradas asi que deberemos hacer lo mismo para poder compararlas) - [x].
-   - Al estar logueado debemos ver un botón de logout en lugar del botón de login que cerrará nuestra sesion.
-   - Utilizar cookies para recordar el usuario logueado.
-   - Distinguir entre usuarios estandar y administradores cuando corresponda según lo mencionado en puntos anteriores.
+   - [x]. El email debe estar registrado en la base de datos - [x].
+   - [x]. La contraseña debe ser la misma que la que guardamos en la base de datos (recordar que las contraseñas se guardan cifradas asi que deberemos hacer lo mismo para poder compararlas).
+   - [x]. Al estar logueado debemos ver un botón de logout en lugar del botón de login que cerrará nuestra sesion.
+   - [x]. Utilizar cookies para recordar el usuario logueado.
+   - [x]. Distinguir entre usuarios estandar y administradores cuando corresponda según lo mencionado en puntos anteriores.
