@@ -1,4 +1,5 @@
 const bcryptjs = require('bcryptjs');
+const { validationResult } = require('express-validator');
 const db = require('../database/models');
 
 const mainController = {
@@ -90,32 +91,36 @@ const mainController = {
   },
   edit: (req, res) => {
     // Implement edit book
-    db.Book.findByPk(req.params.id, {
-      include: [{ association: 'authors' }]
-    })
+    db.Book.findByPk(req.params.id)
       .then((book) => {
         res.render('editBook', { book });
       }).catch((error) => console.log(error));
   },
-  processEdit: (req, res) => {
+  processEdit: async (req, res) => {
     // Implement edit book
-    res.send('edit book metode PUT');  
-    /*db.Book.update({
-      title: req.body.title,
-      cover: req.body.cover,
-      description: req.body.description
-    })
-      .then(() => {
-        db.Book.findAll({
-          include: [{ association: 'authors' }]
-        })
-          .then((books) => {
-            res.render('home', { books });
-          })
-          .catch((error) => console.log(error))
+    let errors = validationResult(req);
+    let book = await db.Book.findByPk(req.params.id);
+    if (!errors.isEmpty()) {
+      res.render('editBook', { 
+        book,
+        errors: errors.array(),
+        oldData: req.body
+      });
+    } else {
+      db.Book.update({
+        title: req.body.title,
+        cover: req.body.cover,
+        description: req.body.description
+      }, {
+        where: {
+          id: req.params.id
+        }
       })
-      .catch((error) => console.log(error))
-      */
+        .then(() => {
+          res.redirect('/');
+        })
+        .catch((error) => console.log(error)); 
+    }
   }
 };
 
