@@ -13,6 +13,11 @@ const validator = {
         body('country').notEmpty().withMessage('Country is required'),
         body('password').notEmpty().withMessage('Password is required'),
         body('category').notEmpty().withMessage('Category is required')
+    ],
+    login: [
+        body('email').notEmpty().withMessage('Email is required').bail()
+            .isEmail().withMessage('Invalid Email'),
+        body('password').notEmpty().withMessage('Password is required')
     ]
 }
 

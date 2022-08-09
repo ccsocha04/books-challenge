@@ -30,7 +30,8 @@
                 </div>
                 <div class="col-md-9 pe-5">
   
-                  <input type="email" name="email" class="form-control form-control-lg" placeholder="example@gmail.com" />
+                  <input type="email" name="email" class="form-control form-control-lg" placeholder="example@gmail.com" 
+                  value="<%= locals.oldData && oldData.email ? oldData.email : '' %>"/>
   
                 </div>
               </div>
@@ -45,7 +46,8 @@
                 </div>
                 <div class="col-md-9 pe-5">
   
-                  <input type="password" name="password" class="form-control form-control-lg" >
+                  <input type="password" name="password" class="form-control form-control-lg" 
+                  value="<%= locals.oldData && oldData.password ? oldData.password : '' %>"/>
   
                 </div>
               </div>
@@ -58,6 +60,17 @@
   
             </div>
           </form>
+
+          <% if(locals.errors) { %>
+            <br>
+            <div class="alert alert-danger">
+              <ul>
+                <% errors.forEach(error => { %>
+                  <li><%= error.msg %></li>
+                <% }) %>
+              </ul>
+            </div>
+          <% } %>
   
         </div>
       </div>

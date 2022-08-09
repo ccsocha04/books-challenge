@@ -31,6 +31,7 @@
           </a>
         <% })} %>
       </div>
+      
       <% if(locals.msg) { %>
         <br>
         <div class="alert alert-success">
@@ -38,6 +39,25 @@
               <li><%= msg %></li>
           </ul>
         </div>
+        <script>
+          setTimeout(function() {
+            window.location.href = '/';
+          }, 2000);
+        </script>
+      <% } %>
+
+      <% if(locals.msgLogin) { %>
+        <br>
+        <div class="alert alert-primary">
+          <ul>
+              <li><%= msgLogin %></li>
+          </ul>
+        </div>
+        <script>
+          setTimeout(function() {
+            window.location.href = '/';
+          }, 2000);
+        </script>
       <% } %>
 
   </div>

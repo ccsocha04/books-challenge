@@ -107,13 +107,50 @@ const mainController = {
   },
   login: (req, res) => {
     // Implement login process
-
     res.render('login');
   },
   processLogin: (req, res) => {
     // Implement login process
-    res.send('Session started id: ' + req.session.id);
-    // res.render('home');
+    let errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.render('login', {
+        errors: errors.array(),
+        oldData: req.body
+      });
+    } else {
+      db.User.findOne({
+        where: {
+          email: req.body.email
+        }
+      })
+        .then((user) => {
+          if (user) {
+            if (bcryptjs.compareSync(req.body.password, user.Pass)) {
+              req.session.user = user;
+              db.Book.findAll({
+                include: [{ association: 'authors' }]
+              })
+                .then((books) => {
+                  res.render('home', { 
+                    books,
+                    msgLogin: 'User logged in'
+                  });
+                })
+                .catch((error) => console.log(error));
+            } else {
+              res.render('login', {
+                errors: [{ msg: 'Invalid password' }],
+                oldData: req.body
+              });
+            }
+          } else {
+            res.render('login', {
+              errors: [{ msg: 'Unregistered email' }],
+              oldData: req.body
+            });
+          }
+        }).catch((error) => console.log(error));
+    }
   },
   edit: (req, res) => {
     // Implement edit book
