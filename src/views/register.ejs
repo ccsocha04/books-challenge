@@ -30,7 +30,7 @@
                 </div>
                 <div class="col-md-9 pe-5">
   
-                  <input type="text" name="name" class="form-control form-control-lg" />
+                  <input type="text" name="name" class="form-control form-control-lg" value="<%= locals.oldData && oldData.name ? oldData.name : '' %>" />
   
                 </div>
               </div>
@@ -45,7 +45,8 @@
                 </div>
                 <div class="col-md-9 pe-5">
   
-                  <input type="email" name="email" class="form-control form-control-lg" placeholder="example@gmail.com" />
+                  <input type="email" name="email" class="form-control form-control-lg" placeholder="example@gmail.com"
+                  value="<%= locals.oldData && oldData.email ? oldData.email : '' %>" />
   
                 </div>
               </div>
@@ -60,7 +61,8 @@
                 </div>
                 <div class="col-md-9 pe-5">
   
-                  <input type="text" name="country" class="form-control form-control-lg" placeholder="Argentina" />
+                  <input type="text" name="country" class="form-control form-control-lg" placeholder="Argentina" 
+                  value="<%= locals.oldData && oldData.country ? oldData.country : '' %>" />
   
                 </div>
               </div>
@@ -75,7 +77,8 @@
                 </div>
                 <div class="col-md-9 pe-5">
   
-                  <input type="password" name="password" class="form-control form-control-lg" >
+                  <input type="password" name="password" class="form-control form-control-lg" 
+                  value="<%= locals.oldData && oldData.password ? oldData.password : '' %>" />
   
                 </div>
               </div>
@@ -90,9 +93,9 @@
                 </div>
                 <div class="col-md-9 pe-5">
   
-                  <input type="radio" name="category" id="admin" value="1" />
+                  <input type="radio" name="category" id="admin" value="1" <%= locals.oldData && oldData.category == 1 ? 'checked' : '' %> />
                   <label for="admin">Admin</label>
-                  <input type="radio" name="category" id="user" value="2" />
+                  <input type="radio" name="category" id="user" value="2" <%= locals.oldData && oldData.category == 2 ? 'checked' : '' %>/>
                   <label for="user">User</label>
   
                 </div>
@@ -106,6 +109,17 @@
   
             </div>
           </form>
+
+          <% if(locals.errors) { %>
+            <br>
+            <div class="alert alert-danger">
+              <ul>
+                <% errors.forEach(error => { %>
+                  <li><%= error.msg %></li>
+                <% }) %>
+              </ul>
+            </div>
+          <% } %>
   
         </div>
       </div>

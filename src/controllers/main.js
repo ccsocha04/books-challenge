@@ -66,18 +66,44 @@ const mainController = {
   register: (req, res) => {
     res.render('register');
   },
-  processRegister: (req, res) => {
-    db.User.create({
-      Name: req.body.name,
-      Email: req.body.email,
-      Country: req.body.country,
-      Pass: bcryptjs.hashSync(req.body.password, 10),
-      CategoryId: req.body.category
-    })
-      .then(() => {
-        res.redirect('/');
+  processRegister: async (req, res) => {
+    let errors = validationResult(req);
+    let emailUser = await db.User.findAll({
+      where: {
+        email: req.body.email
+      }
+    });  
+    if (!errors.isEmpty()) {
+      res.render('register', { 
+        errors: errors.array(),
+        oldData: req.body
+      });
+    } else if (emailUser.length > 0) {
+      res.render('register', {
+        errors: [{ msg: 'Email already exists' }],
+        oldData: req.body
+      });
+    } else {
+      db.User.create({
+        Name: req.body.name,
+        Email: req.body.email,
+        Country: req.body.country,
+        Pass: bcryptjs.hashSync(req.body.password, 10),
+        CategoryId: req.body.category
       })
-      .catch((error) => console.log(error));
+        .then(() => {
+          db.Book.findAll({
+            include: [{ association: 'authors' }]
+          })
+            .then((books) => {
+              res.render('home', { 
+                books,
+                msg: 'User registered successfully'
+              });
+            })
+            .catch((error) => console.log(error));
+        }).catch((error) => console.log(error));        
+    }
   },
   login: (req, res) => {
     // Implement login process
@@ -117,9 +143,17 @@ const mainController = {
         }
       })
         .then(() => {
-          res.redirect('/');
-        })
-        .catch((error) => console.log(error)); 
+          db.Book.findAll({
+            include: [{ association: 'authors' }]
+          })
+            .then((books) => {
+              res.render('home', { 
+                books,
+                msg: 'Book updated successfully'
+              });
+            })
+            .catch((error) => console.log(error));
+        }).catch((error) => console.log(error)); 
     }
   }
 };

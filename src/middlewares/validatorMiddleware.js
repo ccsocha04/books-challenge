@@ -8,9 +8,11 @@ const validator = {
     ],
     register: [
         body('name').notEmpty().withMessage('Name is required'),
-        body('email').isEmail().withMessage('Invalid Email'),
+        body('email').notEmpty().withMessage('Email is required').bail()
+            .isEmail().withMessage('Invalid Email'),
         body('country').notEmpty().withMessage('Country is required'),
-        body('password').notEmpty().withMessage('Password is required')
+        body('password').notEmpty().withMessage('Password is required'),
+        body('category').notEmpty().withMessage('Category is required')
     ]
 }
 

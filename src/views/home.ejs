@@ -31,6 +31,15 @@
           </a>
         <% })} %>
       </div>
+      <% if(locals.msg) { %>
+        <br>
+        <div class="alert alert-success">
+          <ul>
+              <li><%= msg %></li>
+          </ul>
+        </div>
+      <% } %>
+
   </div>
 </div>
 
